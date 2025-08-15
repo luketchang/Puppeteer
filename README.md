@@ -44,9 +44,9 @@
 
 ## 📑 TODO
 
-- [] Diverse pose subset of Articulation-XL2.0
-- [] Inference codes
-- [] Model checkpoints
+- [ ] Diverse pose subset of Articulation-XL2.0
+- [ ] Inference codes
+- [ ] Model checkpoints
 
 ## 😊 Acknowledgment
 
