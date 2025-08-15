@@ -29,7 +29,7 @@
 
 <p>
   <a href="https://chaoyuesong.github.io/Puppeteer/"><strong>Project</strong></a> |
-  <a href="https://arxiv.org/abs/2502.12135"><strong>Paper</strong></a> | 
+  <a href="https://arxiv.org/abs/2508.10898"><strong>Paper</strong></a> | 
   <a href="https://www.youtube.com/watch?v=eJP_VR4cVnk"><strong>Video</strong></a> |
   <a href="https://huggingface.co/datasets/chaoyue7/Articulation-XL2.0"><strong>Data: Articulation-XL2.0</strong></a>
 </p>
@@ -40,7 +40,7 @@
 <br />
 
 ## 🔥 News
-- Aug 15, 2025: Release [paper](https://arxiv.org/abs/2502.12135) of Puppeteer!
+- Aug 15, 2025: Release [paper](https://arxiv.org/abs/2508.10898) of Puppeteer!
 
 ## 📑 TODO
 
@@ -56,5 +56,10 @@ The code builds upon [MagicArticulate](https://github.com/Seed3D/MagicArticulate
 ## 📚 Citation
 
 ```
-
+@article{song2025puppeteer,
+  title={Puppeteer: Rig and Animate Your 3D Models},
+  author={Chaoyue Song and Xiu Li and Fan Yang and Zhongcong Xu and Jiacheng Wei and Fayao Liu and Jiashi Feng and Guosheng Lin and Jianfeng Zhang},
+  journal={arXiv preprint arXiv:2508.10898},
+  year={2025}
+}
 ```
