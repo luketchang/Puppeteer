@@ -193,7 +193,7 @@ chmod +x demo_animation.sh
 echo "Setting up SSH key for Git access..."
 SSH_KEY_DIR="/workspace/ssh_keys"
 
-# Check if SSH keys exist in the project
+# Check if SSH keys exist in the workspace
 if [ -f "$SSH_KEY_DIR/id_rsa" ] && [ -f "$SSH_KEY_DIR/id_rsa.pub" ]; then
     echo "Found SSH keys in $SSH_KEY_DIR/"
 
@@ -208,18 +208,22 @@ if [ -f "$SSH_KEY_DIR/id_rsa" ] && [ -f "$SSH_KEY_DIR/id_rsa.pub" ]; then
     chmod 600 ~/.ssh/id_rsa
     chmod 644 ~/.ssh/id_rsa.pub
 
-    # Add to ssh-agent if running
-    if [ -n "$SSH_AUTH_SOCK" ]; then
-        ssh-add ~/.ssh/id_rsa 2>/dev/null || true
-    fi
+    # Start ssh-agent and add the key
+    echo "Starting SSH agent and adding key..."
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
 
-    echo "SSH key installed to ~/.ssh/"
-    echo "Public key content (should be added to GitHub/GitLab):"
-    cat "$SSH_KEY_DIR/id_rsa.pub"
+    # Test SSH connection to GitHub
+    echo "Testing SSH connection to GitHub..."
+    ssh -T git@github.com -o StrictHostKeyChecking=no 2>&1 | head -1
+
+    echo "SSH key installed and configured successfully!"
+    echo "You can now use git with SSH authentication."
     echo ""
 else
     echo "Warning: SSH keys not found in $SSH_KEY_DIR/"
     echo "Expected files: $SSH_KEY_DIR/id_rsa and $SSH_KEY_DIR/id_rsa.pub"
+    echo "Please ensure SSH keys are generated in the workspace directory."
 fi
 
 echo "Setup completed! You can now run:"
