@@ -217,6 +217,9 @@ if [ -f "$SSH_KEY_DIR/id_rsa" ] && [ -f "$SSH_KEY_DIR/id_rsa.pub" ]; then
     echo "Testing SSH connection to GitHub..."
     ssh -T git@github.com -o StrictHostKeyChecking=no 2>&1 | head -1
 
+    git config --global user.email luketchang00@gmail.com
+    git config --global user.name "Luke Tchang"
+
     echo "SSH key installed and configured successfully!"
     echo "You can now use git with SSH authentication."
     echo ""
