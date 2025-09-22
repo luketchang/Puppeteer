@@ -58,6 +58,7 @@ tmp/
 
 # Media files (can be large)
 *.mp4
+!examples/**/*.mp4
 *.avi
 *.mov
 *.mkv
@@ -79,6 +80,9 @@ examples/*/flow/
 examples/*/flow_vis/
 examples/*/track_2d_joints/
 examples/*/track_2d_verts/
+
+# Allow objs directories in examples
+!examples/*/objs/
 
 # IDE
 .vscode/

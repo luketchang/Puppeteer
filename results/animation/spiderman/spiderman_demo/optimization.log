@@ -1,0 +1,7 @@
+2025-09-22 00:28:46,323 Iter 0: Loss: 1.8093, RGB: 0.2234, Mask: 0.2234, Flow: 0.1787, Proj_joint: 0.3351, Proj_vert: 0.6701, Depth: 0.1787, Smooth: 0.0000, Joint smooth: 0.0000, Root smooth: 0.0000
+2025-09-22 01:55:37,214 Iter 0: Loss: 1.8093, RGB: 0.2234, Mask: 0.2234, Flow: 0.1787, Proj_joint: 0.3351, Proj_vert: 0.6701, Depth: 0.1787, Smooth: 0.0000, Joint smooth: 0.0000, Root smooth: 0.0000
+2025-09-22 01:56:30,649 Iter 5: Loss: 1.7013, RGB: 0.2149, Mask: 0.2157, Flow: 0.1719, Proj_joint: 0.3091, Proj_vert: 0.6204, Depth: 0.1692, Smooth: 0.0000, Joint smooth: 0.0001, Root smooth: 0.0000
+2025-09-22 01:57:23,883 Iter 10: Loss: 1.3975, RGB: 0.1884, Mask: 0.1910, Flow: 0.1578, Proj_joint: 0.2375, Proj_vert: 0.4799, Depth: 0.1418, Smooth: 0.0000, Joint smooth: 0.0009, Root smooth: 0.0001
+2025-09-22 01:58:16,661 Iter 15: Loss: 1.0311, RGB: 0.1514, Mask: 0.1565, Flow: 0.1381, Proj_joint: 0.1582, Proj_vert: 0.3155, Depth: 0.1085, Smooth: 0.0001, Joint smooth: 0.0027, Root smooth: 0.0002
+2025-09-22 01:59:09,190 Iter 20: Loss: 0.7265, RGB: 0.1181, Mask: 0.1239, Flow: 0.1191, Proj_joint: 0.0963, Proj_vert: 0.1842, Depth: 0.0795, Smooth: 0.0002, Joint smooth: 0.0050, Root smooth: 0.0003
+2025-09-22 04:44:10,129 Iter 0: Loss: 1.8093, RGB: 0.2234, Mask: 0.2234, Flow: 0.1787, Proj_joint: 0.3351, Proj_vert: 0.6701, Depth: 0.1787, Smooth: 0.0000, Joint smooth: 0.0000, Root smooth: 0.0000
