@@ -1,0 +1,97 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Model checkpoints and weights (large files)
+*.pth
+*.ckpt
+*.pt
+*.safetensors
+*.bin
+
+# Results and outputs
+results/
+outputs/
+logs/
+*.log
+
+# Cache directories
+.cache/
+*_cache/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Media files (can be large)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+
+# Data directories
+data/
+dataset/
+datasets/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Conda environments
+*.conda
+*.tar.bz2
+
+# Claude Code directory
+.claude/

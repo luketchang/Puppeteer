@@ -37,6 +37,9 @@ done
 
 cd animation
 
+# Add animation directory to Python path so third_partys can be found
+export PYTHONPATH="${PWD}:${PYTHONPATH}"
+
 # save flow
 echo "Processing sequences with save_flow.py..."
 for seq_dir in ../examples/*/; do
@@ -51,10 +54,10 @@ done
 echo "Running optimization for each sequence..."
 mkdir -p ../results/animation
 
-python optimization.py --save_path ../results/animation --iter 200 --input_path ../examples --img_size 960 \
+python optimization.py --save_path ../results/animation --iter 30 --input_path ../examples --img_size 960 \
         --seq_name 'spiderman' --save_name 'spiderman_demo'
 
-python optimization.py --save_path ../results/animation --iter 200 --input_path ../examples --img_size 960 \
+python optimization.py --save_path ../results/animation --iter 30 --input_path ../examples --img_size 960 \
         --seq_name 'deer' --save_name 'deer_demo' --smooth_weight 1 --main_renderer front_left --additional_renderer "right,front_right,back_right"
 
 echo "Animation completed."
