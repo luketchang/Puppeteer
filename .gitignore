@@ -56,18 +56,6 @@ logs/
 temp/
 tmp/
 
-# Media files (can be large)
-*.mp4
-!examples/**/*.mp4
-*.avi
-*.mov
-*.mkv
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.bmp
-*.tiff
 
 # Data directories
 data/
@@ -99,6 +87,14 @@ examples/*/track_2d_verts/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Examples
+examples/*/imgs
+examples/*/depth
+examples/*/track_2d_joints
+examples/*/track_2d_verts
+examples/*/flow
+
 
 # Conda environments
 *.conda
