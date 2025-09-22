@@ -95,3 +95,5 @@ Thumbs.db
 
 # Claude Code directory
 .claude/
+
+# SSH keys are stored in /workspace/ssh_keys/ (outside repo)

@@ -189,6 +189,39 @@ cd ../../../..
 chmod +x demo_rigging.sh
 chmod +x demo_animation.sh
 
+# ====== Setup SSH key for Git access ======
+echo "Setting up SSH key for Git access..."
+SSH_KEY_DIR="/workspace/ssh_keys"
+
+# Check if SSH keys exist in the project
+if [ -f "$SSH_KEY_DIR/id_rsa" ] && [ -f "$SSH_KEY_DIR/id_rsa.pub" ]; then
+    echo "Found SSH keys in $SSH_KEY_DIR/"
+
+    # Create .ssh directory if it doesn't exist
+    mkdir -p ~/.ssh
+
+    # Copy SSH keys to .ssh directory
+    cp "$SSH_KEY_DIR/id_rsa" ~/.ssh/
+    cp "$SSH_KEY_DIR/id_rsa.pub" ~/.ssh/
+
+    # Set correct permissions
+    chmod 600 ~/.ssh/id_rsa
+    chmod 644 ~/.ssh/id_rsa.pub
+
+    # Add to ssh-agent if running
+    if [ -n "$SSH_AUTH_SOCK" ]; then
+        ssh-add ~/.ssh/id_rsa 2>/dev/null || true
+    fi
+
+    echo "SSH key installed to ~/.ssh/"
+    echo "Public key content (should be added to GitHub/GitLab):"
+    cat "$SSH_KEY_DIR/id_rsa.pub"
+    echo ""
+else
+    echo "Warning: SSH keys not found in $SSH_KEY_DIR/"
+    echo "Expected files: $SSH_KEY_DIR/id_rsa and $SSH_KEY_DIR/id_rsa.pub"
+fi
+
 echo "Setup completed! You can now run:"
 echo "PYOPENGL_PLATFORM=egl ./demo_rigging.sh"
 echo "PYOPENGL_PLATFORM=egl ./demo_animation.sh"
