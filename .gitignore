@@ -77,7 +77,6 @@ datasets/
 examples/*/depth/
 examples/*/flow/
 examples/*/flow_vis/
-examples/*/objs/
 examples/*/track_2d_joints/
 examples/*/track_2d_verts/
 
