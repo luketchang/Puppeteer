@@ -44,6 +44,10 @@ conda activate puppeteer
 pip install cython==0.29.36
 
 pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/cu118
+
+# Install tetgen separately with --no-build-isolation so it uses the installed cython
+pip install tetgen==0.5.2 --no-build-isolation
+
 pip install -r requirements.txt
 pip install flash-attn==2.6.3 --no-build-isolation
 pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.1+cu118.html

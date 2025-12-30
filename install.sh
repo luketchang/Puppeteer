@@ -37,6 +37,11 @@ source "$CONDA_DIR/etc/profile.d/conda.sh"
 echo "Miniconda installed successfully. Restart shell or run:"
 echo "source ~/.bashrc"
 
+# ====== Install Claude Code ======
+echo "Installing Claude Code (Anthropic) via npm..."
+npm install -g @anthropic-ai/claude-code
+
+
 # ====== Create conda environment & install dependencies ======
 conda create -n puppeteer python==3.10.13 -y
 conda activate puppeteer
@@ -44,6 +49,10 @@ conda activate puppeteer
 pip install cython==0.29.36
 
 pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/cu118
+
+# Install tetgen separately with --no-build-isolation so it uses the installed cython
+pip install tetgen==0.5.2 --no-build-isolation
+
 pip install -r requirements.txt
 pip install flash-attn==2.6.3 --no-build-isolation
 pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.1+cu118.html
@@ -54,11 +63,6 @@ pip install huggingface_hub
 echo "Installing Node.js (v20.x) and npm..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt install -y nodejs
-
-# ====== Install Claude Code ======
-echo "Installing Claude Code (Anthropic) via npm..."
-npm install -g @anthropic-ai/claude-code
-
 source ~/.bashrc
 
 # ====== Other dependencies for rendering and EGL ======
