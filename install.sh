@@ -1,15 +1,63 @@
 #!/usr/bin/env bash
 set -e
 
-# Where to install Conda
-CONDA_DIR=${CONDA_DIR:-/opt/conda}
-
-echo "Installing Miniconda to $CONDA_DIR..."
-
-# ====== Install dependencies ======
+# ====== Install system dependencies ======
 apt update && apt install -y wget bzip2 curl git ffmpeg
 
-# ====== Download latest Miniconda ======
+# ====== Install npm and Node.js ======
+echo "Installing Node.js (v20.x) and npm..."
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
+
+# ====== Install Claude Code ======
+echo "Installing Claude Code (Anthropic) via npm..."
+npm install -g @anthropic-ai/claude-code
+
+# ====== Setup SSH key for Git access ======
+echo "Setting up SSH key for Git access..."
+SSH_KEY_DIR="/workspace/ssh_keys"
+
+# Check if SSH keys exist in the workspace
+if [ -f "$SSH_KEY_DIR/id_rsa" ] && [ -f "$SSH_KEY_DIR/id_rsa.pub" ]; then
+    echo "Found SSH keys in $SSH_KEY_DIR/"
+
+    # Create .ssh directory if it doesn't exist
+    mkdir -p ~/.ssh
+
+    # Copy SSH keys to .ssh directory
+    cp "$SSH_KEY_DIR/id_rsa" ~/.ssh/
+    cp "$SSH_KEY_DIR/id_rsa.pub" ~/.ssh/
+
+    # Set correct permissions
+    chmod 600 ~/.ssh/id_rsa
+    chmod 644 ~/.ssh/id_rsa.pub
+
+    # Start ssh-agent and add the key
+    echo "Starting SSH agent and adding key..."
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
+
+    # Test SSH connection to GitHub
+    echo "Testing SSH connection to GitHub..."
+    ssh -T git@github.com -o StrictHostKeyChecking=no 2>&1 | head -1
+
+    git config --global user.email luketchang00@gmail.com
+    git config --global user.name "Luke Tchang"
+
+    echo "SSH key installed and configured successfully!"
+    echo "You can now use git with SSH authentication."
+    echo ""
+else
+    echo "Warning: SSH keys not found in $SSH_KEY_DIR/"
+    echo "Expected files: $SSH_KEY_DIR/id_rsa and $SSH_KEY_DIR/id_rsa.pub"
+    echo "Please ensure SSH keys are generated in the workspace directory."
+fi
+
+# ====== Install Miniconda ======
+CONDA_DIR=${CONDA_DIR:-/opt/conda}
+echo "Installing Miniconda to $CONDA_DIR..."
+
+# Download latest Miniconda
 wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
 
 # Create target dir if needed
@@ -28,19 +76,13 @@ export PATH="$CONDA_DIR/bin:$PATH"
 # Initialize conda for bash
 "$CONDA_DIR/bin/conda" init bash
 
-# ====== Accept Anaconda Terms of Service to avoid non-interactive errors ======
+# Accept Anaconda Terms of Service to avoid non-interactive errors
 "$CONDA_DIR/bin/conda" tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
 "$CONDA_DIR/bin/conda" tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 
 source "$CONDA_DIR/etc/profile.d/conda.sh"
 
-echo "Miniconda installed successfully. Restart shell or run:"
-echo "source ~/.bashrc"
-
-# ====== Install Claude Code ======
-echo "Installing Claude Code (Anthropic) via npm..."
-npm install -g @anthropic-ai/claude-code
-
+echo "Miniconda installed successfully."
 
 # ====== Create conda environment & install dependencies ======
 conda create -n puppeteer python==3.10.13 -y
@@ -59,12 +101,6 @@ pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.1+cu118.html
 pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py310_cu118_pyt211/download.html
 pip install huggingface_hub
 
-# ====== Install npm and Node.js ======
-echo "Installing Node.js (v20.x) and npm..."
-curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt install -y nodejs
-source ~/.bashrc
-
 # ====== Other dependencies for rendering and EGL ======
 apt update && apt install -y \
     xvfb \
@@ -78,11 +114,6 @@ apt update && apt install -y \
     libegl1-mesa-dev
 
 pip install pyglet pyrender PyOpenGL
-
-# ====== Activate conda environment and install additional packages ======
-source "$CONDA_DIR/etc/profile.d/conda.sh"
-conda activate puppeteer
-pip install huggingface_hub
 
 # ====== Download model checkpoints ======
 echo "Downloading model checkpoints..."
@@ -193,51 +224,8 @@ cd ../../../..
 chmod +x demo_rigging.sh
 chmod +x demo_animation.sh
 
-# ====== Setup SSH key for Git access ======
-echo "Setting up SSH key for Git access..."
-SSH_KEY_DIR="/workspace/ssh_keys"
-
-# Check if SSH keys exist in the workspace
-if [ -f "$SSH_KEY_DIR/id_rsa" ] && [ -f "$SSH_KEY_DIR/id_rsa.pub" ]; then
-    echo "Found SSH keys in $SSH_KEY_DIR/"
-
-    # Create .ssh directory if it doesn't exist
-    mkdir -p ~/.ssh
-
-    # Copy SSH keys to .ssh directory
-    cp "$SSH_KEY_DIR/id_rsa" ~/.ssh/
-    cp "$SSH_KEY_DIR/id_rsa.pub" ~/.ssh/
-
-    # Set correct permissions
-    chmod 600 ~/.ssh/id_rsa
-    chmod 644 ~/.ssh/id_rsa.pub
-
-    # Start ssh-agent and add the key
-    echo "Starting SSH agent and adding key..."
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_rsa
-
-    # Test SSH connection to GitHub
-    echo "Testing SSH connection to GitHub..."
-    ssh -T git@github.com -o StrictHostKeyChecking=no 2>&1 | head -1
-
-    git config --global user.email luketchang00@gmail.com
-    git config --global user.name "Luke Tchang"
-
-    echo "SSH key installed and configured successfully!"
-    echo "You can now use git with SSH authentication."
-    echo ""
-else
-    echo "Warning: SSH keys not found in $SSH_KEY_DIR/"
-    echo "Expected files: $SSH_KEY_DIR/id_rsa and $SSH_KEY_DIR/id_rsa.pub"
-    echo "Please ensure SSH keys are generated in the workspace directory."
-fi
-
 echo "Setup completed! You can now run:"
 echo "PYOPENGL_PLATFORM=egl ./demo_rigging.sh"
 echo "PYOPENGL_PLATFORM=egl ./demo_animation.sh"
 
 echo "Installation complete. Restart your shell or run 'source ~/.bashrc' before using conda."
-
-
-
