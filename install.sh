@@ -2,7 +2,7 @@
 set -e
 
 # ====== Install system dependencies ======
-apt update && apt install -y wget bzip2 curl git ffmpeg
+apt update && apt install -y wget bzip2 curl git ffmpeg vim nano
 
 # ====== Install npm and Node.js ======
 echo "Installing Node.js (v20.x) and npm..."

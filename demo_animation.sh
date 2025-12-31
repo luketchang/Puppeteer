@@ -55,7 +55,7 @@ echo "Running optimization for each sequence..."
 mkdir -p ../results/animation
 
 python optimization.py --save_path ../results/animation --iter 50 --input_path ../examples --img_size 960 \
-        --seq_name 'charizard' --save_name 'charizard_demo'
+        --seq_name 'character' --save_name 'character_demo'
 
 # python optimization.py --save_path ../results/animation --iter 30 --input_path ../examples --img_size 960 \
 #         --seq_name 'spiderman' --save_name 'spiderman_demo'

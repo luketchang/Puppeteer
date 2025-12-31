@@ -12,20 +12,21 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+import json
+import os
+import subprocess
+from pathlib import Path
+
+import numpy as np
+import torch
+from PIL import Image
 from pytorch3d.io import load_obj
 from pytorch3d.renderer import TexturesAtlas
 from pytorch3d.structures import Meshes
-
-import os
-import torch
-import json
-import numpy as np
-from tqdm import tqdm
-from pathlib import Path
-import subprocess
-from PIL import Image
 from scipy.ndimage import gaussian_filter1d
 from third_partys.co_tracker.save_track import save_track
+from tqdm import tqdm
+
 
 def render_single_mesh(renderer, mesh_path, out_path="render_result.png", atlas_size=8):
     """
@@ -238,8 +239,8 @@ def save_track_points(point_vis_mask, renderer, model, img_path, out_dir, args):
     os.makedirs(track_2d_point_path, exist_ok=True)
     
     num_visible = len(visible_indices)
-    MAX_VISIBLE_POINTS = 15000
-    MAX_SAMPLE_POINTS = 4000
+    MAX_VISIBLE_POINTS = 5000  # Reduced to avoid GPU OOM
+    MAX_SAMPLE_POINTS = 2000   # Reduced proportionally
     
     # Determine tracking strategy
     tracking_mode = "full" if num_visible <= MAX_VISIBLE_POINTS else "sampled"
