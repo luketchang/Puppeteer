@@ -100,6 +100,7 @@ pip install flash-attn==2.6.3 --no-build-isolation
 pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.1+cu118.html
 pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py310_cu118_pyt211/download.html
 pip install huggingface_hub
+pip install bpy==4.2.0
 
 # ====== Other dependencies for rendering and EGL ======
 apt update && apt install -y \
