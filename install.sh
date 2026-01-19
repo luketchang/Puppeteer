@@ -224,6 +224,10 @@ cd ../../../..
 # Make demo scripts executable
 chmod +x demo_rigging.sh
 chmod +x demo_animation.sh
+chmod +x restore_ssh.sh
+
+# Add animation to PYTHONPATH in bashrc for convenience
+echo 'export PYTHONPATH="/workspace/Puppeteer/animation:${PYTHONPATH}"' >> ~/.bashrc
 
 echo "Setup completed! You can now run:"
 echo "PYOPENGL_PLATFORM=egl ./demo_rigging.sh"
